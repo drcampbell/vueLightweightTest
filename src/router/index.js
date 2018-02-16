@@ -6,6 +6,7 @@ import DynamicForm from '@/components/DynamicForm';
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',

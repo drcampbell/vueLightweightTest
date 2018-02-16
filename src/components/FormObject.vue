@@ -3,7 +3,8 @@
         <div
             v-for="(field, key) in fobject.fields"
             v-bind:key="key">
-            <form-field :field="field"></form-field>
+            <form-field :field="field" v-if="field.type !== 'Object'"></form-field>
+            <form-object :fobject="field" v-if="field.type === 'Object'"></form-object>
         </div>
     </section>
     <!-- <div>{{myobject}}</div> -->

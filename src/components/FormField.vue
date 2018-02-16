@@ -1,32 +1,36 @@
-<template>
-  <div class="pan-field mdc-text-field mdc-text-field--upgraded">
-    <input
-        :name="field.keyName"
-        type="text"
-        class="mdc-text-field__input"
-        v-model="field.value"
-        />
-    <label class="mdc-text-field__label">{{field.label}}</label>
-    <div class="mdc-text-field__bottom-line"></div>
-</div>
-</template>
-
 <script>
-import { mdc } from '@/lib/material-components-web';
-// import mdcCss from '@/lib/material-components-web.css';
+// import { mdc } from '@/lib/material-components-web';
+import TextField from '@/components/TextField';
+import EnumerationField from '@/components/EnumerationField';
 
 export default {
   name: 'FormField',
+  functional: true,
+  render(createElement, context) {
+    function getInput() {
+      const input = context.props.field;
+      if (input.type === 'Enumeration') {
+        return EnumerationField;
+      }
+      return TextField;
+    }
+    return createElement(
+      getInput(), {
+        props: {
+          field: context.props.field,
+        },
+      });
+  },
   props: ['field'],
   data() {
     return {
     };
   },
-  mounted() {
-    this.mdComponent = new mdc.textField.MDCTextField(this.$el);
-  },
-  beforeDestroy() {
-    this.mdComponent();
-  },
+  // mounted() {
+  //   this.mdComponent = new mdc.textField.MDCTextField(this.$el);
+  // },
+  // beforeDestroy() {
+  //   this.mdComponent();
+  // },
 };
 </script>
